@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Nandu ❤️</title>
+    <style>
+        body {
+            background: url('https://images.pexels.com/photos/2494701/pexels-photo-2494701.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            font-family: 'Cursive', sans-serif;
+            overflow-y: auto;
+        }
+        .container {
+            margin-top: 100px;
+        }
+        .question-box, .love-lock-box {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+        }
+        .btn {
+            background: pink;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: hotpink;
+        }
+        #final-note {
+            display: none;
+            font-size: 22px;
+            margin-top: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            white-space: pre-line;
+        }
+        .typing::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <audio id="bg-music" loop>
+        <source src="Christina-Perri-A-Thousand-Years.mp3" type="audio/mp3">
+    </audio>
+    <div class="container">
+        <h1>Happy 4-Month Anniversary, My Love! 💖</h1>
+        <button class="btn" onclick="startQuestions()">Start</button>
+        <div id="questions" class="question-box">
+            <p id="question-text"></p>
+            <button class="btn" id="optionA" onclick="nextQuestion('A')"></button>
+            <button class="btn" id="optionB" onclick="nextQuestion('B')"></button>
+        </div>
+        <div id="final-note" class="typing"></div>
+        <div id="love-lock-box" class="love-lock-box">
+            <p>Seal your promise, my love! 💖</p>
+            <button class="btn" onclick="rejectLoveLock()">❌ No 😣</button>
+            <button class="btn" onclick="acceptLoveLock()">🔒 Love Lock</button>
+        </div>
+    </div>
+    
+    <script>
+        let currentQuestion = 0;
+        const questions = [
+            { text: "What am I to you?", options: ["Little Babu 😁", "Daddyyyy 😤"] },
+            { text: "Am I your favorite person? (You can’t say no 😁)", options: ["Yes", "Yes"] },
+            { text: "Who loves more?", options: ["Me 😍", "You ❤️"] },
+            { text: "What's my cutest habit?", options: ["Everything 😘", "Your smile 😊"] },
+            { text: "If we fight, what will we do?", options: ["Sort it out 💞", "Never leave each other 😭"] }
+        ];
+        
+        function startQuestions() {
+            document.getElementById('questions').style.display = 'block';
+            showQuestion();
+        }
+        
+        function showQuestion() {
+            if (currentQuestion < questions.length) {
+                const q = questions[currentQuestion];
+                document.getElementById('question-text').innerText = q.text;
+                document.getElementById('optionA').innerText = q.options[0];
+                document.getElementById('optionB').innerText = q.options[1];
+            }
+        }
+        
+        function nextQuestion(choice) {
+            if (currentQuestion === 0 && choice === 'A') {
+                document.getElementById('question-text').innerText = "Today, Little Babu is only Daddy 😤";
+                document.getElementById('optionA').style.display = 'none';
+            } else {
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    showQuestion();
+                } else {
+                    document.getElementById('questions').style.display = 'none';
+                    typeFinalNote();
+                }
+            }
+        }
+        
+        function typeFinalNote() {
+            const note = `💖 MY DEAR NANDU 💖\n\n 
+            ⭐ My baby girl, you are pure perfection! 😍 \n
+            ⭐ Every little thing about you, your sweet soul, your adorable habits – everything is so beautiful that I can’t stop looking at you ❤️\n
+            ⭐ Your nicknames – Mommy, Babygurl, Cheeku, Choti Babu, Angel, Ms. Perfectly Perfect – they aren’t just names, they define your personality! 🥰\n
+            ⭐ My love for you is beyond words, it’s limitless 💘\n
+            ⭐ No matter how many fights we have, we will always sort them out, leaving is never an option 😭❤️\n
+            ⭐ Now, my love, you have to make these promises: \n
+                💖 You will always love me, no matter what!\n
+                💖 You will always stay with me & never stop smiling!\n
+                💖 Distance or time will never lessen our love!\n
+                💖 You will hold my hand forever, for life! 🥺💍\n
+            `;
+            
+            let i = 0;
+            function type() {
+                if (i < note.length) {
+                    document.getElementById('final-note').innerText += note.charAt(i);
+                    i++;
+                    setTimeout(type, 50);
+                } else {
+                    document.getElementById('love-lock-box').style.display = 'block';
+                }
+            }
+            document.getElementById('final-note').style.display = 'block';
+            type();
+        }
+        
+        function rejectLoveLock() {
+            alert("You can't say no 😣");
+        }
+        
+        function acceptLoveLock() {
+            alert("Our Love is Locked Forever! 🔒💖");
+        }
+    </script>
+</body>
+</html>
